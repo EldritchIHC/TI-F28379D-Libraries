@@ -1,0 +1,77 @@
+/*
+ * CLA_FUNCTION.cla
+ *
+ *  Created on: 19 feb. 2023
+ *      Author: Paul
+ */
+#include "CLA_SHARED.h"
+
+__interrupt void Cla1Task1 ( void )
+{
+                //Calculate the new Error
+                float fError[0] =  fRef - fVoltageMeasurement;
+                //Calculare the new Duty
+                stCLAData->fDuty[3] = ( stCLAData->fBCoeffs[0]*stCLAData->fError[3] )
+
+                        + ( stCLAData->fBCoeffs[1]*stCLAData->fError[2] ) - ( stCLAData->fACoeffs[1]*stCLAData->fDuty[2] )
+
+                        + ( stCLAData->fBCoeffs[2]*stCLAData->fError[1] ) - ( stCLAData->fACoeffs[2]*stCLAData->fDuty[1] )
+
+                        + ( stCLAData->fBCoeffs[3]*stCLAData->fError[0] ) - ( stCLAData->fACoeffs[3]*stCLAData->fDuty[0] ;
+                //Shift Error values
+                stCLAData->fError[0]=stCLAData->fError[1];
+                stCLAData->fError[1]=stCLAData->fError[2];
+                stCLAData->fError[2]=stCLAData->fError[3];
+                //Shift Duty values
+                stCLAData->fDuty[0] = stCLAData->fDuty[1];
+                stCLAData->fDuty[1] = stCLAData->fDuty[2];
+                stCLAData->fDuty[2] = stCLAData->fDuty[3];
+                //Duty saturation
+                if( stCLAData->fDuty[0] > DUTY_MAX )
+                    {
+                        stCLAData->fDuty[0] = DUTY_MAX;
+                    }
+                else if( stCLAData->fDuty[0] < DUTY_MIN )
+                    {
+                        stCLAData->fDuty[0] = DUTY_MIN;
+                    }
+
+                return stCLAData->fDuty[0];
+}
+
+interrupt void Cla1Task2 ( void )
+{
+
+}
+
+interrupt void Cla1Task3 ( void )
+{
+
+}
+
+interrupt void Cla1Task4 ( void )
+{
+
+}
+
+interrupt void Cla1Task5 ( void )
+{
+
+}
+
+interrupt void Cla1Task6 ( void )
+{
+
+}
+
+interrupt void Cla1Task7 ( void )
+{
+
+}
+
+interrupt void Cla1Task8 ( void )
+{
+
+}
+
+
