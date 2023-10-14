@@ -1,0 +1,9 @@
+# FIXED
+
+CLA_FUNCTION.obj: ../CLA_FUNCTION.cla
+CLA_FUNCTION.obj: ../CLA_SHARED.h
+
+../CLA_FUNCTION.cla:
+
+../CLA_SHARED.h:
+
